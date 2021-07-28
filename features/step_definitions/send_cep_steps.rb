@@ -21,11 +21,20 @@ Quando('envio um GET com um CEP de {string}') do |localidade|
 end
 
 Então('devo receber dados válidos') do
-  expect(@received.code).to eql 200
+  expect(@received.code).to eql(200)
   @massa.all? do |key, value|
     expect(@received[key.to_s]).to eql(value)
     # puts "Expected #{key}: #{value}    Received: #{@received.[key.to_s]}"
   end
   # expect(@massa.all? { |key, value| @received[key.to_s].eql?(value) }).to be_truthy
   puts "HTML code received: #{@received.code}"
+end
+
+
+Quando('envio um GET com um {string}') do |cep_invalido|
+  @received = Viacep.get("/#{cep_invalido}/json")
+end
+
+Então('devo receber código {string}') do |code|
+  expect(@received.code).to eql(code.to_i)
 end
