@@ -9,7 +9,7 @@ Funcionalidade: Testar a API Viacep
   
   @test2
   Cenario: Enviar um CEP do Rio de Janeiro
-    Quando envio um GET com o CEP 
+    Quando envio um GET com o CEP 24241-001
     Então devo receber dados válidos
   
   @validar_varios_ceps
