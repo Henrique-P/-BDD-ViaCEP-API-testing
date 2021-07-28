@@ -13,12 +13,21 @@ Quando('envio um GET com um cep válido e solicito a resposta em dado {string}')
   when 'xml'
     @received = Viacep.get('/11712510/xml')
     expect(@received.body.match?(@xml_format)).to be_truthy
+    expect(@received.body.match?(@querty_format)).to be_falsey
+    expect(@received.body.match?(@piped_format)).to be_falsey
+    expect(@received.body.match?(@json_format)).to be_falsey
   when 'querty'
     @received = Viacep.get('/11712510/querty')
     expect(@received.body.match?(@querty_format)).to be_truthy
+    expect(@received.body.match?(@xml_format)).to be_falsey
+    expect(@received.body.match?(@piped_format)).to be_falsey
+    expect(@received.body.match?(@json_format)).to be_falsey
   else
     @received = Viacep.get('/11712510/piped')
     expect(@received.body.match?(@piped_format)).to be_truthy
+    expect(@received.body.match?(@json_format)).to be_falsey
+    expect(@received.body.match?(@querty_format)).to be_falsey
+    expect(@received.body.match?(@xml_format)).to be_falsey
   end
 end
 
