@@ -4,12 +4,12 @@ Funcionalidade: Testar a API Viacep
 
   @test_sp
   Cenario: Enviar um CEP de São Paulo
-    Quando envio um GET com o CEP 11712-510
+    Quando envio um GET com o CEP 01311-200
     Então devo receber dados válidos
   
   @test_rj
   Cenario: Enviar um CEP do Rio de Janeiro
-    Quando envio um GET com o CEP 24241-001
+    Quando envio um GET com o CEP 22010-000
     Então devo receber dados válidos
   
   @validar_varios_ceps
@@ -23,8 +23,13 @@ Funcionalidade: Testar a API Viacep
     | 'rio_de_janeiro' |
     | 'minas_gerais'   |
 
+  @busca_por_endereço
+  Cenário: Validar a resposta da API ao buscar por um logradouro
+    Quando solicito dados refente a Avenida Atlântica
+    Então devo receber dados válidos do cep
+
   @teste_negativo
-  Esquema do Cenário: Validar o codigo HTML após fornecer entradas inválidas
+  Esquema do Cenário: Validar o codigo HTTP após fornecer entradas inválidas
     Quando envio um GET com um <cep_invalido>
     Então devo receber código '400'
   
