@@ -24,8 +24,9 @@ end
 
 Então('devo receber dados válidos') do
   expect(@received.code).to eql(200) # instrução para validar o codigo HTTP recebido
-  @massa.all? do |key, value| # laço para validar cada dado do json com cada chave e valor do hash de massa
+  @massa.each do |key, value| # laço para validar cada dado do json com cada chave e valor do hash de massa
     expect(@received[key.to_s]).to eql(value)
+    puts @received[key.to_s]
   end
 end
 
@@ -36,9 +37,9 @@ end
 
 Então('devo receber dados válidos do cep') do
   expect(@received.code).to eql(200) # instrução para validar o codigo HTTP recebido
-  # @app.massa_rj.all? do |key, value| # laço para validar cada dado do json com cada chave e valor do hash de massa
-
-  # end
+  @app.massa_rj.each do |key, value| # laço para validar cada dado do json com cada chave e valor do hash de massa
+    expect(@received[0][key.to_s]).to eql(value)
+  end
 end
 
 # bloco refente ao teste negativo
